@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+from tkinter import *
+from Fish.Common.View import *
+from Fish.Common.FishBoard import *
+from Fish.Common.FishTile import *
+from Fish.Common.Player import *
+from Fish.Common.State import *
+import argparse
+
+#This class is only for testing the drawBoard method in View.py
+#The method takes in a canvas to add the images to, and this class provides the canvas for putting the images on
+#Eventually when the rest of the View/UI is built this class will no longer be needed as the visual part can be tested through that
+class FishCanvas():
+    def __init__(self, master):
+        self.master = master
+        self.create()
+
+    # Creates the actual canvas and draws the hexagon
+    def create(self):
+        sizeGiven = 50
+        self.canvas = Canvas(self.master, scrollregion=(0, 0, 3 * sizeGiven + 20, 2 * sizeGiven + 20))
+
+        hbar = Scrollbar(self.master, orient=HORIZONTAL)
+        hbar.pack(side=BOTTOM, fill=X)
+        hbar.config(command=self.canvas.xview)
+        vbar = Scrollbar(self.master, orient=VERTICAL)
+        vbar.pack(side=RIGHT, fill=Y)
+        vbar.config(command=self.canvas.yview)
+
+        v = View()
+        p1 = Player((1997,11,16))
+        p2 = Player((2001,2,2))
+        
+        ex_board = FishBoard(4,2)
+        ex_board.createBoard(equal=True, randomHoles=False)
+        ex_state = State(ex_board,[p1,p2])
+
+        ex_state.place_penguin(0,0,"red")
+        ex_state.place_penguin(1,0,"white")
+        v.drawState(self.canvas,ex_state)
+
+        self.canvas.config(width=min(1000, 3 * sizeGiven), height=min(500, 2 * sizeGiven))
+        self.canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
+        self.canvas.pack(fill=BOTH, expand=1)
+
+
+if __name__ == "__main__":
+    master = Tk()
+    fish_canvas = FishCanvas(master)
+    master.title("FishCanvas")
+    mainloop()

@@ -1,0 +1,4 @@
+#!/bin/bash
+python -m unittest discover Common -v
+python -m unittest discover Player -v
+python -m unittest discover Admin -v
