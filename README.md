@@ -1,3 +1,9 @@
+Hey Thats My Fish!
+==================
+Welcome to a fully functional version of Hey Thats my Fish! This game has minimal GUI implimentation as it only renders a single state at a time. The game is fully functional using the command line and implements AI player strategies one can use to compete against or use in a tournament to be implemented in the future.
+
+
+
 - Common: Contains all the code for required assingments. This includes the visual and the logistics part.
 - Planning: Contains all documents pertaining to planning ahead. Including planning of how to represent a game state, as well as how to represent games for an external interface to see. This folder also includes self-eval forms.a
 
